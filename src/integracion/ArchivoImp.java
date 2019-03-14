@@ -6,7 +6,13 @@ import java.util.ArrayList;
 
 import negocio.TDatos;
 import tablas.Atributo;
+import tablas.Ejemplos;
 
+/**
+ * 
+ * @author Guillermo Delgado Yepes
+ *
+ */
 public class ArchivoImp implements Archivo {
 
 	@Override
@@ -30,22 +36,23 @@ public class ArchivoImp implements Archivo {
 	}
 
 	@Override
-	public boolean leerEjemplos(TDatos tDatos, ArrayList<Atributo> listaAtributos) {
+	public boolean leerEjemplos(TDatos tDatos, ArrayList<Atributo> listaAtributos, Ejemplos listaDeEjemplos) {
 		try {
 			String cadena;
 			FileReader f = new FileReader(tDatos.getArchivoEjemplos());
 			BufferedReader b = new BufferedReader(f);
 			while((cadena = b.readLine()) != null) {
 				String aux[] = cadena.split(",");
+				listaDeEjemplos.addLinea(aux); //Guardamos la linea en nuestra lista de ejemplos
 				int i = 0;
 				for(String elemento: aux) {
-					if(aux[aux.length - 1].equalsIgnoreCase(tDatos.getPositivo())) {
+					if(aux[aux.length - 1].equalsIgnoreCase(tDatos.getPositivo())) { //Si el resultado es positivo
 						listaAtributos.get(i).addP(elemento);
 					}
-					else if (aux[aux.length - 1].equalsIgnoreCase(tDatos.getNegativo())) {
+					else if (aux[aux.length - 1].equalsIgnoreCase(tDatos.getNegativo())) { //Si el resultado es negativo
 						listaAtributos.get(i).addN(elemento);
 					}
-					else {
+					else { //No coincide con el resultado = ¡ERROR!
 						b.close();
 						return false;
 					}

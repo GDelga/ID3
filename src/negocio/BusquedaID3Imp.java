@@ -1,5 +1,10 @@
 package negocio;
 
-public class BusquedaID3Imp {
+/**
+ * 
+ * @author Guillermo Delgado Yepes
+ *
+ */
+public class BusquedaID3Imp implements BusquedaID3 {
 
 }
