@@ -34,7 +34,7 @@ public class ArchivoImp implements Archivo {
 	}
 
 	@Override
-	public boolean leerEjemplos(TDatos tDatos, ArrayList<Atributo> listaAtributos, Ejemplos listaDeEjemplos) {
+	public int leerEjemplos(TDatos tDatos, ArrayList<Atributo> listaAtributos, Ejemplos listaDeEjemplos) {
 		try {
 			String cadena;
 			FileReader f = new FileReader(tDatos.getArchivoEjemplos());
@@ -52,15 +52,15 @@ public class ArchivoImp implements Archivo {
 					}
 					else { //No coincide con el resultado = ¡ERROR!
 						b.close();
-						return false;
+						return -2;
 					}
 					i++;
 				}
 			}
 			b.close();
-			return true;
+			return 0;
 		} catch (Exception e) {
-			return false;
+			return -1;
 		}
 	}
 

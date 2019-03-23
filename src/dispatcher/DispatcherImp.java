@@ -19,6 +19,9 @@ public class DispatcherImp extends Dispatcher {
 		case(Events.BUSCAR_OK):
 			GUIMain.getInstance().actualizar(contexto);
 		break;
+		case(Events.BUSCAR_KO):
+			GUIMain.getInstance().actualizar(contexto);
+		break;
 		}
 	}
 }

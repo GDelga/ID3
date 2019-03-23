@@ -1,6 +1,5 @@
 package command;
 
-import arbol.Nodo;
 import factoria.FactoriaNegocio;
 import negocio.TDatos;
 import presentacion.Contexto;
@@ -14,8 +13,8 @@ public class CommandBuscar implements Command{
 	@Override
 	public Contexto execute(Object dato) {
 		TDatos tDatos = (TDatos) dato;
-		Nodo n = FactoriaNegocio.getInstance().crearBusquedaID3().busqueda(tDatos);
-		if(n == null) return new Contexto(Events.BUSCAR_KO, null);
+		Object n = FactoriaNegocio.getInstance().crearBusquedaID3().busqueda(tDatos);
+		if(n instanceof Integer) return new Contexto(Events.BUSCAR_KO, n);
 		else return new Contexto(Events.BUSCAR_OK, n);
 	}
 

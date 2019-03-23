@@ -11,5 +11,5 @@ import tablas.Ejemplos;
  */
 public interface Archivo {
 	public ArrayList<Atributo> leerAtributos(TDatos tDatos);
-	public boolean leerEjemplos(TDatos tDatos, ArrayList<Atributo> listaAtributos, Ejemplos listaDeEjemplos);
+	public int leerEjemplos(TDatos tDatos, ArrayList<Atributo> listaAtributos, Ejemplos listaDeEjemplos);
 }

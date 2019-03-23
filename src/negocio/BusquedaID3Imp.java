@@ -12,30 +12,25 @@ import tablas.Ejemplos;
  */
 public class BusquedaID3Imp implements BusquedaID3 {
 
-	public Nodo busqueda(TDatos tDatos) {
+	public Object busqueda(TDatos tDatos) {
 		ArrayList<Atributo> listaAtributos = FactoriaIntegracion.getInstance().crearArchivo().leerAtributos(tDatos);
 		if(listaAtributos == null) {
-			//ERROR
+			return -3; //ERROR!
 		}
 		else {
 			Ejemplos listaEjemplos = new Ejemplos();
-			boolean ok = FactoriaIntegracion.getInstance().crearArchivo().leerEjemplos(tDatos, listaAtributos, listaEjemplos);
-			if(!ok) {
-				//ERROR
+			int ok = FactoriaIntegracion.getInstance().crearArchivo().leerEjemplos(tDatos, listaAtributos, listaEjemplos);
+			if(ok < 0) {
+				return ok; //ERROR!
 			}
 			else {
 				listaAtributos.remove(listaAtributos.size() - 1); //Borro el atributo que define positivo y negativo
-				for (Atributo atr : listaAtributos) {
-						atr.calcularMerito();
-				}
-				
 				Nodo mejor = actualizaEjemplos(tDatos, listaAtributos, listaEjemplos);
 				mejor.setEjemplos(listaEjemplos);
 				algoritmo(tDatos, mejor, listaAtributos);
 				return mejor;
 			}
 		}
-		return null;
 	}
 
 	private Nodo actualizaEjemplos(TDatos tDatos, ArrayList<Atributo> listaAtributos, Ejemplos listaEjemplos) {
@@ -96,9 +91,6 @@ public class BusquedaID3Imp implements BusquedaID3 {
 				else if(hijo.getNumPositivos() == 0 && hijo.getNumNegativos() > 0) {
 					//Si solo hay negativos
 					hijo.addHijo(new Nodo(tDatos.getNegativo()));
-				}
-				else {
-					//ERROR!!
 				}
 			}
 		}

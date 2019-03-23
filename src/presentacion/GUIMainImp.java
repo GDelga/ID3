@@ -1,5 +1,10 @@
 package presentacion;
 
+import java.awt.Font;
+
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import arbol.Nodo;
 import controlador.Controlador;
 import negocio.TDatos;
@@ -184,7 +189,10 @@ public class GUIMainImp extends GUIMain {
     }
 
     private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {
-        System.exit(0);
+    	JLabel label = new JLabel("<html><body>Vuelve pronto<center>😄</center></body></html>");
+		label.setFont(new Font("Copperplate Gothic Bold", Font.BOLD, 20));
+		JOptionPane.showMessageDialog(null, label, "¡Hasta pronto!", JOptionPane.INFORMATION_MESSAGE);
+		System.exit(0);
     }
 
     private void jButtonEnviarActionPerformed(java.awt.event.ActionEvent evt) {
@@ -212,12 +220,17 @@ public class GUIMainImp extends GUIMain {
     		nErrores++;
     	}
     	else {
-    		negativo = this.jTextFieldValorNegativo.getText();;
+    		negativo = this.jTextFieldValorNegativo.getText();
     	}
     	if(nErrores == 0) {
     		this.clearData();
     		TDatos tDatos = new TDatos(archivoAtributo, archivoEjemplo, positivo, negativo);
     		Controlador.getInstance().accion(new Contexto(Events.BUSCAR_ID3, tDatos));
+    	}
+    	else {
+    		JLabel label = new JLabel("<html><body>Todos los campos son obligatorios</body></html>");
+			label.setFont(new Font("Copperplate Gothic Bold", Font.BOLD, 25));
+			JOptionPane.showMessageDialog(null, label, "¡Aviso!", JOptionPane.INFORMATION_MESSAGE);
     	}
     }
 
@@ -256,6 +269,28 @@ public class GUIMainImp extends GUIMain {
 			GUIArbol vista = GUIArbol.getInstance();
 			vista.setArbol(nodo);
 			vista.initView();
+		break;
+		case(Events.BUSCAR_KO):
+			this.setVisible(true);
+			int res = (int) contexto.getDato();
+			switch(res){
+			case(-1):
+				JLabel label1 = new JLabel("<html><body>Fallo en la lectura del archivo de ejemplos</body></html>");
+				label1.setFont(new Font("Copperplate Gothic Bold", Font.BOLD, 25));
+				JOptionPane.showMessageDialog(null, label1, "¡Aviso!", JOptionPane.INFORMATION_MESSAGE);
+			break;
+			case(-2):
+				JLabel label2 = new JLabel("<html><body>No coincide el valor del positivo y/o negativo</body></html>");
+				label2.setFont(new Font("Copperplate Gothic Bold", Font.BOLD, 25));
+				JOptionPane.showMessageDialog(null, label2, "¡Aviso!", JOptionPane.INFORMATION_MESSAGE);
+			break;
+			case(-3):
+				JLabel label3 = new JLabel("<html><body>Fallo en la lectura del archivo de atributos</body></html>");
+				label3.setFont(new Font("Copperplate Gothic Bold", Font.BOLD, 25));
+				JOptionPane.showMessageDialog(null, label3, "¡Aviso!", JOptionPane.INFORMATION_MESSAGE);
+			break;
+			}
+		break;
 		}
 	}
 }
