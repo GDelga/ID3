@@ -3,9 +3,7 @@ package tablas;
 import java.util.ArrayList;
 
 /**
- * 
  * @author Guillermo Delgado Yepes
- *
  */
 public class Ejemplos {
 

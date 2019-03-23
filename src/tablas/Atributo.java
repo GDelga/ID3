@@ -4,17 +4,15 @@ import java.util.HashMap;
 import java.util.Set;
 
 /**
- * 
  * @author Guillermo Delgado Yepes
- *
  */
 public class Atributo {
 	
 	private String nombre; //Nombre del atributo
 	private int total; //Total de veces que aparece en la lista cada elemento
 	private double merito; //Calculo del merito
-	private HashMap<String, Double> P; //Positvos
-	private HashMap<String, Double> N; //Negativos
+	private HashMap<String, Integer> P; //Positvos
+	private HashMap<String, Integer> N; //Negativos
 	private HashMap<String, Integer> A; //Total de cada elemento del atributo
 	
 	public Atributo(String nombre) {
@@ -28,9 +26,9 @@ public class Atributo {
 	
 	public void addP(String elemento) {
 		if(this.P.containsKey(elemento)) {
-			this.P.put(elemento, this.P.get(elemento) + 1.0);
+			this.P.put(elemento, this.P.get(elemento) + 1);
 		}
-		else this.P.put(elemento, 1.0);
+		else this.P.put(elemento, 1);
 		if(this.A.containsKey(elemento)) {
 			this.A.put(elemento, this.A.get(elemento) + 1);
 		}
@@ -40,9 +38,9 @@ public class Atributo {
 	
 	public void addN(String elemento) {
 		if(this.N.containsKey(elemento)) {
-			this.N.put(elemento, this.N.get(elemento) + 1.0);
+			this.N.put(elemento, this.N.get(elemento) + 1);
 		}
-		else this.N.put(elemento, 1.0);
+		else this.N.put(elemento, 1);
 		if(this.A.containsKey(elemento)) {
 			this.A.put(elemento, this.A.get(elemento) + 1);
 		}
@@ -51,28 +49,24 @@ public class Atributo {
 	}
 	
 	public void calcularMerito() {
-		//Recorrer HashMap para buscar todos los elementos
-		Set<String> aux = this.A.keySet(); //Coger todos los elementos de N
-		/*for(String elemento: this.P.keySet()) {//Coger todos los elementos de P que no estan en N
-			if(!aux.contains(elemento)) aux.add(elemento); //Si ese elemento no esta en aux, se incluye
-		}*/
+		Set<String> aux = this.A.keySet();
 		for(String elemento: aux) {
-			Double p = 0d, n = 0d;
+			double p = 0, n = 0;
 			double r = 0;
 			if(this.P.containsKey(elemento)) {//Calculo p
-				p = this.P.get(elemento) / this.A.get(elemento);
+				p = (double) this.P.get(elemento) / (double) this.A.get(elemento);
 			}
 			if(this.N.containsKey(elemento)) {//Calculo n
-				n = this.N.get(elemento) / this.A.get(elemento);
+				n = (double)this.N.get(elemento)/ (double)this.A.get(elemento);
 			}
-			r = this.A.get(elemento) / this.total; // Calculo r
-			int info = 0;
+			r = (double)this.A.get(elemento) / (double)this.total; // Calculo r
+			double info = 0;
 			//Calculo info
-			if(p != 0d) {
+			if(p != 0) {
 				info += -p * (Math.log(p)/Math.log(2));
 			}
-			if(n != 0d) {
-				info += -n *(Math.log(p)/Math.log(2));
+			if(n != 0) {
+				info += -n *(Math.log(n)/Math.log(2));
 			}
 			this.merito += r*info; //Calculo merito de ese elemento
 		}
@@ -110,19 +104,19 @@ public class Atributo {
 		this.merito = merito;
 	}
 
-	public HashMap<String, Double> getP() {
+	public HashMap<String, Integer> getP() {
 		return P;
 	}
 
-	public void setP(HashMap<String, Double> p) {
+	public void setP(HashMap<String, Integer> p) {
 		P = p;
 	}
 
-	public HashMap<String, Double> getN() {
+	public HashMap<String, Integer> getN() {
 		return N;
 	}
 
-	public void setN(HashMap<String, Double> n) {
+	public void setN(HashMap<String, Integer> n) {
 		N = n;
 	}
 
