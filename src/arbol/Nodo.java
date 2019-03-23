@@ -2,8 +2,11 @@ package arbol;
 
 import java.util.ArrayList;
 
-import tablas.Ejemplos;
 
+import tablas.Ejemplos;
+/**
+ * @author Guillermo Delgado Yepes
+ */
 public class Nodo {
 	
 	private ArrayList<Nodo> hijos; //Array de hijos del nodo actual

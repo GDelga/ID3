@@ -7,9 +7,7 @@ import tablas.Atributo;
 import tablas.Ejemplos;
 
 /**
- * 
  * @author Guillermo Delgado Yepes
- *
  */
 public interface Archivo {
 	public ArrayList<Atributo> leerAtributos(TDatos tDatos);

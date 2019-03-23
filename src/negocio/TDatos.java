@@ -1,9 +1,7 @@
 package negocio;
 
 /**
- * 
  * @author Guillermo Delgado Yepes
- *
  */
 public class TDatos {
 

@@ -52,10 +52,10 @@ public class Atributo {
 	
 	public void calcularMerito() {
 		//Recorrer HashMap para buscar todos los elementos
-		Set<String> aux = this.N.keySet(); //Coger todos los elementos de N
-		for(String elemento: this.P.keySet()) {//Coger todos los elementos de P que no estan en N
+		Set<String> aux = this.A.keySet(); //Coger todos los elementos de N
+		/*for(String elemento: this.P.keySet()) {//Coger todos los elementos de P que no estan en N
 			if(!aux.contains(elemento)) aux.add(elemento); //Si ese elemento no esta en aux, se incluye
-		}
+		}*/
 		for(String elemento: aux) {
 			Double p = 0d, n = 0d;
 			double r = 0;
@@ -134,5 +134,8 @@ public class Atributo {
 		A = a;
 	}
 	
-	
+	public Set<String> getTipos(){
+		
+		return A.keySet();
+	}
 }

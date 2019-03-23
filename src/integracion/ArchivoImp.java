@@ -9,9 +9,7 @@ import tablas.Atributo;
 import tablas.Ejemplos;
 
 /**
- * 
  * @author Guillermo Delgado Yepes
- *
  */
 public class ArchivoImp implements Archivo {
 
@@ -56,6 +54,7 @@ public class ArchivoImp implements Archivo {
 						b.close();
 						return false;
 					}
+					i++;
 				}
 			}
 			b.close();

@@ -36,6 +36,10 @@ public class Ejemplos {
 	public void setListaDeEjemplos(ArrayList<ArrayList<String>> listaDeEjemplos) {
 		this.listaDeEjemplos = listaDeEjemplos;
 	}
+
+	public void add(ArrayList<String> ejemplo) {
+		this.listaDeEjemplos.add(ejemplo);
+	}
 	
 	
 }
