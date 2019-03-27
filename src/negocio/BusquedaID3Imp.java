@@ -52,7 +52,7 @@ public class BusquedaID3Imp implements BusquedaID3 {
 			
 			atributo.calcularMerito();
 			double aux = atributo.getMerito();
-			if(aux <= mejorMerito) {
+			if(aux < mejorMerito) {
 				mejorMerito = aux;
 				mejorAtributo = atributo;
 			}
