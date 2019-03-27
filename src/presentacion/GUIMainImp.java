@@ -267,7 +267,7 @@ public class GUIMainImp extends GUIMain {
 		case(Events.BUSCAR_OK):
 			this.clearData();
 			Nodo nodo = (Nodo) contexto.getDato();
-			GUIArbol vista = GUIArbol.getInstance();
+			GUIArbol vista = new GUIArbol();
 			vista.setTDatos(tDatos);
 			vista.setArbol(nodo);
 			vista.initView();

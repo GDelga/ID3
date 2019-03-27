@@ -37,24 +37,15 @@ import negocio.TDatos;
 public class GUIArbol  extends JFrame{
 
 	private static final long serialVersionUID = 1L;
-	private JPanel arbolPanel;
-	private static GUIArbol instance;
-	private mxGraph graph;
 	private Nodo arbol;
 	private TDatos tDatos;
 	
-	public static GUIArbol getInstance(){
-		if(instance==null)
-			instance= new GUIArbol();
-		return instance;
-	}
-	
 	public GUIArbol(){
 		super("Algoritmo ID3 - Guillermo Delgado Yepes");
-		graph= new mxGraph();
 	}	
 	
 	public void initView() {
+		mxGraph graph= new mxGraph();
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		//PREPARA EL GRAFICO PARA ACTUALIZAR
 		graph.getModel().beginUpdate();
@@ -90,7 +81,7 @@ public class GUIArbol  extends JFrame{
 		mxIGraphLayout layout = new mxHierarchicalLayout(graph);
 	    layout.execute(graph.getDefaultParent());
 	    final mxGraphComponent graphComponent = new mxGraphComponent(graph);
-      	arbolPanel = new JPanel();
+      	JPanel arbolPanel = new JPanel();
 		arbolPanel.add(graphComponent);
 		JPanel panel = new JPanel(new GridLayout(2, 1));
 		JButton cargar = new JButton("Cargar archivos");
