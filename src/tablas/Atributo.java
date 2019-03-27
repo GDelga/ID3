@@ -132,4 +132,8 @@ public class Atributo {
 		
 		return A.keySet();
 	}
+	
+	public boolean contiene(String elem){
+		return A.containsKey(elem);
+	}
 }

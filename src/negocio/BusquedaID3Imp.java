@@ -1,7 +1,6 @@
 package negocio;
 
 import java.util.ArrayList;
-
 import arbol.Nodo;
 import factoria.FactoriaIntegracion;
 import tablas.Atributo;
@@ -27,6 +26,7 @@ public class BusquedaID3Imp implements BusquedaID3 {
 				listaAtributos.remove(listaAtributos.size() - 1); //Borro el atributo que define positivo y negativo
 				Nodo mejor = actualizaEjemplos(tDatos, listaAtributos, listaEjemplos);
 				mejor.setEjemplos(listaEjemplos);
+				mejor.setAtributos(listaAtributos);
 				algoritmo(tDatos, mejor, listaAtributos);
 				return mejor;
 			}
@@ -122,6 +122,55 @@ public class BusquedaID3Imp implements BusquedaID3 {
 				}
 			}
 		}
+	}
+	
+	@Override
+	public Object encontrarSolucion(String positivo, String negativo, Nodo arbol, ArrayList<Atributo> atributos, ArrayList<String> ejemplos) {
+		if(arbol != null) {
+			if(arbol.getNombre().equals(positivo)){
+				return positivo;
+			} else if (arbol.getNombre().equals(negativo)){
+					return negativo;
+			}
+			else {
+				String clave="";
+				int pos=-1, i = 0;
+				boolean encontrado = false;
+				while(i < atributos.size() && !encontrado) {
+					if(atributos.get(i).getNombre().equals(arbol.getNombre())){
+						encontrado = true;
+						int j=0;
+						boolean encontrado2 = false;
+						while(j < ejemplos.size() && !encontrado2) {
+							if(atributos.get(i).contiene(ejemplos.get(j))){
+								clave= ejemplos.get(j);
+								pos=j;
+								encontrado2 = true;
+							}
+							++j;
+						}
+					}
+					++i;
+				}
+				if(clave == ""){
+					return -1;
+				}else{
+					Nodo siguiente = null;
+					boolean encontrado3 = false;
+					int z = 0;
+					while (z < arbol.getHijos().size() && !encontrado3) {
+						if(arbol.getHijos().get(z).getNombre().equals(ejemplos.get(pos))) {
+							siguiente = arbol.getHijos().get(z);
+							encontrado3 = true;
+						}
+						++z;
+					}
+					ejemplos.remove(pos);
+					return encontrarSolucion(positivo, negativo, siguiente.getHijos().get(0), atributos, ejemplos);
+				}
+			}
+		}
+		else return "NOSESAE";
 	}
 	
 }

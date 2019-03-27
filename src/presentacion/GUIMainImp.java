@@ -13,13 +13,14 @@ import negocio.TDatos;
  * @author Guillermo Delgado Yepes
  */
 public class GUIMainImp extends GUIMain {
+	
+	private TDatos tDatos;
 
     public GUIMainImp() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
 
-    @SuppressWarnings("unchecked")
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -223,8 +224,7 @@ public class GUIMainImp extends GUIMain {
     		negativo = this.jTextFieldValorNegativo.getText();
     	}
     	if(nErrores == 0) {
-    		this.clearData();
-    		TDatos tDatos = new TDatos(archivoAtributo, archivoEjemplo, positivo, negativo);
+    		this.tDatos = new TDatos(archivoAtributo, archivoEjemplo, positivo, negativo);
     		Controlador.getInstance().accion(new Contexto(Events.BUSCAR_ID3, tDatos));
     	}
     	else {
@@ -265,8 +265,10 @@ public class GUIMainImp extends GUIMain {
 			this.setVisible(true);
 		break;
 		case(Events.BUSCAR_OK):
+			this.clearData();
 			Nodo nodo = (Nodo) contexto.getDato();
 			GUIArbol vista = GUIArbol.getInstance();
+			vista.setTDatos(tDatos);
 			vista.setArbol(nodo);
 			vista.initView();
 		break;
@@ -282,7 +284,7 @@ public class GUIMainImp extends GUIMain {
 			case(-2):
 				JLabel label2 = new JLabel("<html><body>No coincide el valor del positivo y/o negativo</body></html>");
 				label2.setFont(new Font("Copperplate Gothic Bold", Font.BOLD, 25));
-				JOptionPane.showMessageDialog(null, label2, "¡Aviso!", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, label2,"¡Aviso!", JOptionPane.INFORMATION_MESSAGE);
 			break;
 			case(-3):
 				JLabel label3 = new JLabel("<html><body>Fallo en la lectura del archivo de atributos</body></html>");
@@ -290,6 +292,16 @@ public class GUIMainImp extends GUIMain {
 				JOptionPane.showMessageDialog(null, label3, "¡Aviso!", JOptionPane.INFORMATION_MESSAGE);
 			break;
 			}
+		break;
+		case(Events.COMPROBAR_OK):
+			JLabel label = new JLabel("El resultado es: " + (String) contexto.getDato());
+			label.setFont(new Font("Copperplate Gothic Bold", Font.BOLD, 25));
+			JOptionPane.showMessageDialog(null, label, "¡Aviso!", JOptionPane.INFORMATION_MESSAGE);
+		break;
+		case(Events.COMPROBAR_KO):
+			JLabel label4 = new JLabel("Uno de los elementos no se puede evaluar");
+			label4.setFont(new Font("Copperplate Gothic Bold", Font.BOLD, 25));
+			JOptionPane.showMessageDialog(null, label4, "¡Aviso!", JOptionPane.INFORMATION_MESSAGE);
 		break;
 		}
 	}
