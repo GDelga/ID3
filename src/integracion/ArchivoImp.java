@@ -41,20 +41,26 @@ public class ArchivoImp implements Archivo {
 			BufferedReader b = new BufferedReader(f);
 			while((cadena = b.readLine()) != null) {
 				String aux[] = cadena.split(",");
-				listaDeEjemplos.addLinea(aux); //Guardamos la linea en nuestra lista de ejemplos
-				int i = 0;
-				for(String elemento: aux) {
-					if(aux[aux.length - 1].equalsIgnoreCase(tDatos.getPositivo())) { //Si el resultado es positivo
-						listaAtributos.get(i).addP(elemento);
+				if(listaAtributos.size() != aux.length) {
+					b.close();
+					return -3;
+				}
+				else {
+					listaDeEjemplos.addLinea(aux); //Guardamos la linea en nuestra lista de ejemplos
+					int i = 0;
+					for(String elemento: aux) {
+						if(aux[aux.length - 1].equalsIgnoreCase(tDatos.getPositivo())) { //Si el resultado es positivo
+							listaAtributos.get(i).addP(elemento);
+						}
+						else if (aux[aux.length - 1].equalsIgnoreCase(tDatos.getNegativo())) { //Si el resultado es negativo
+							listaAtributos.get(i).addN(elemento);
+						}
+						else { //No coincide con el resultado = ¡ERROR!
+							b.close();
+							return -2;
+						}
+						i++;
 					}
-					else if (aux[aux.length - 1].equalsIgnoreCase(tDatos.getNegativo())) { //Si el resultado es negativo
-						listaAtributos.get(i).addN(elemento);
-					}
-					else { //No coincide con el resultado = ¡ERROR!
-						b.close();
-						return -2;
-					}
-					i++;
 				}
 			}
 			b.close();

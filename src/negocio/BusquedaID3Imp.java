@@ -14,7 +14,7 @@ public class BusquedaID3Imp implements BusquedaID3 {
 	public Object busqueda(TDatos tDatos) {
 		ArrayList<Atributo> listaAtributos = FactoriaIntegracion.getInstance().crearArchivo().leerAtributos(tDatos);
 		if(listaAtributos == null) {
-			return -3; //ERROR!
+			return -4; //ERROR!
 		}
 		else {
 			Ejemplos listaEjemplos = new Ejemplos();

@@ -287,9 +287,14 @@ public class GUIMainImp extends GUIMain {
 				JOptionPane.showMessageDialog(null, label2,"¡Aviso!", JOptionPane.INFORMATION_MESSAGE);
 			break;
 			case(-3):
-				JLabel label3 = new JLabel("<html><body>Fallo en la lectura del archivo de atributos</body></html>");
+				JLabel label3 = new JLabel("<html><body>El numero de ejemplos de la linea no coincide con el numero de atributos</body></html>");
 				label3.setFont(new Font("Copperplate Gothic Bold", Font.BOLD, 25));
 				JOptionPane.showMessageDialog(null, label3, "¡Aviso!", JOptionPane.INFORMATION_MESSAGE);
+			break;
+			case(-4):
+				JLabel label4 = new JLabel("<html><body>Fallo en la lectura del archivo de atributos</body></html>");
+				label4.setFont(new Font("Copperplate Gothic Bold", Font.BOLD, 25));
+				JOptionPane.showMessageDialog(null, label4, "¡Aviso!", JOptionPane.INFORMATION_MESSAGE);
 			break;
 			}
 		break;
@@ -299,9 +304,9 @@ public class GUIMainImp extends GUIMain {
 			JOptionPane.showMessageDialog(null, label, "¡Aviso!", JOptionPane.INFORMATION_MESSAGE);
 		break;
 		case(Events.COMPROBAR_KO):
-			JLabel label4 = new JLabel("Uno de los elementos no se puede evaluar");
-			label4.setFont(new Font("Copperplate Gothic Bold", Font.BOLD, 25));
-			JOptionPane.showMessageDialog(null, label4, "¡Aviso!", JOptionPane.INFORMATION_MESSAGE);
+			JLabel label5 = new JLabel("Uno de los elementos no se puede evaluar");
+			label5.setFont(new Font("Copperplate Gothic Bold", Font.BOLD, 25));
+			JOptionPane.showMessageDialog(null, label5, "¡Aviso!", JOptionPane.INFORMATION_MESSAGE);
 		break;
 		}
 	}
